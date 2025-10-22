@@ -4,9 +4,13 @@ import 'home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart';
 import 'login_screen.dart';
+import 'background_sync_service.dart'; // ✅ new
+import 'scan_attendance_page.dart'; // your home page
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Start background sync service
+  BackgroundSyncService().start();
   runApp(const MyApp());
 }
 

@@ -114,21 +114,27 @@ class _ScanAttendancePageState extends State<ScanAttendancePage> {
     }
   }
 
-  void _navigateToResult(bool success, String message, String cardNo) {
-    Navigator.push(
+  void _navigateToResult(bool success, String message, String cardNo) async {
+    // Stop camera before showing result page
+    await _scannerController.stop();
+
+    if (!mounted) return;
+
+    await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => ResultPage(
           isSuccess: success,
           message: message,
-          cardNo: cardNo, // now passing pfId
+          cardNo: cardNo,
         ),
       ),
-    ).then((_) {
-      // after returning, camera resumes and scanning continues
-      _scannerController.start();
-    });
+    );
+
+    // Resume camera after coming back
+    await _scannerController.start();
   }
+
 
   @override
   Widget build(BuildContext context) {

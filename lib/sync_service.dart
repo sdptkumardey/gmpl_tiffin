@@ -14,8 +14,8 @@ class SyncService {
       final mob = prefs.getString("mob") ?? "";
       final ip = prefs.getString("ip") ?? "localhost";
       final baseUrl =
-          "http://$ip/gmpl/native_app/tiffin_emp_sync.php?subject=emp&action=init";
-
+         // "http://$ip/gmpl/native_app/tiffin_emp_sync.php?subject=emp&action=init";
+          "https://$ip/gmpl_tiffin/native_app/tiffin_emp_sync.php?subject=emp&action=init";
       final response = await http.post(
         Uri.parse(baseUrl),
         body: {"user_id": userId, "mob": mob},
@@ -62,8 +62,8 @@ class SyncService {
       final ip = prefs.getString("ip") ?? "localhost";
       final userId = prefs.getString("user_id") ?? ""; // 👈 use pref value
       final baseUrl =
-          "http://$ip/gmpl/native_app/tiffin_save.php?subject=tiffin&action=save";
-
+       //   "http://$ip/gmpl/native_app/tiffin_save.php?subject=tiffin&action=save";
+          "https://$ip/gmpl_tiffin/native_app/tiffin_save.php?subject=tiffin&action=save";
       // Get unsynced records
       final pending = await TiffinDb.instance.getUnsynced();
       if (pending.isEmpty) {

@@ -32,10 +32,11 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       final ip = prefs.getString('ip') ?? '';
-      final baseUrl = 'http://$ip';  // Always add http:// here
+      final baseUrl = 'https://$ip';  // Always add http:// here
       final response = await http.post(
         Uri.parse(
-          '$baseUrl/gmpl/native_app/login.php?subject=login&action=chk',
+        //  '$baseUrl/gmpl/native_app/login.php?subject=login&action=chk',
+          '$baseUrl/gmpl_tiffin/native_app/login.php?subject=login&action=chk',
         ),
         body: {'mob': mob, 'password': password},
       );
